@@ -1,5 +1,3 @@
-package Chapter2Tests
-
 import Chapter2_GettingStarted.Chapter2
 import org.scalatest.FlatSpec
 
