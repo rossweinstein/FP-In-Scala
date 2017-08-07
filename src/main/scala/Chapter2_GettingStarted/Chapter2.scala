@@ -3,11 +3,6 @@ package Chapter2_GettingStarted
 import scala.annotation.tailrec
 
 object Chapter2 {
-  def main(args: Array[String]): Unit = {
-
-
-
-  }
 
   // exercise 2.1
   def getNthFibonacciNum(n: Int): BigInt = {
