@@ -31,9 +31,15 @@ object MyList {
     case _ => 101
   }
 
-  // exercise 3.2
+  // exercise 3.2: write a function that retails all elements except for the head
   def tail[A](theList: MyList[A]): MyList[A] = theList match {
     case MyNil => MyNil
     case MyConstruct(_, tail) => tail
+  }
+
+  //exercise 3.3: write a function that replaces the head of the list with a new value
+  def setHead[A](theList: MyList[A], replacementHead: A): MyList[A] = theList match {
+    case MyNil => sys.error("Cannot replace head of Nil MyList")
+    case MyConstruct(_, tail) => MyConstruct(replacementHead, tail)
   }
 }
