@@ -42,13 +42,13 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyList(6,7,8,9,10))
   }
 
-  "The method drop" should "make return the same list if given a drop value of <= 0" in {
+  "The method drop" should "return the same list if given a drop value of <= 0" in {
     val originalList = MyList(1,2,3,4,5,6,7,8,9,10)
     val droppedList = MyList.drop(originalList, -3)
     assert(droppedList == MyList(1,2,3,4,5,6,7,8,9,10))
   }
 
-  "The method drop" should "make return MyNil when given a list of type MyNil" in {
+  "The method drop" should "return MyNil when given a list of type MyNil" in {
     val originalList = MyNil
     val droppedList = MyList.drop(originalList, 5)
     assert(droppedList == MyNil)
