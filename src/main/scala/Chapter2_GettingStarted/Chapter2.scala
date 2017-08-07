@@ -3,7 +3,11 @@ package Chapter2_GettingStarted
 import scala.annotation.tailrec
 
 object Chapter2 {
-  def main(args: Array[String]): Unit = {}
+  def main(args: Array[String]): Unit = {
+
+
+
+  }
 
   // exercise 2.1
   def getNthFibonacciNum(n: Int): BigInt = {
@@ -19,8 +23,8 @@ object Chapter2 {
   // exercise 2.2
   def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean = {
     @tailrec
-    def areEqual[A](index: Int, as: Array[A], ordered: (A, A) => Boolean): Boolean = index match {
-      case _ if (index == as.length - 1) => true
+    def areEqual(index: Int, as: Array[A], ordered: (A, A) => Boolean): Boolean = index match {
+      case _ if index == as.length - 1 => true
       case _ => if (ordered(as(index), as(index + 1))) areEqual(index + 1, as, ordered) else false
     }
     areEqual(0, as, ordered)
@@ -34,8 +38,4 @@ object Chapter2 {
 
   // exercise 2.5
   def compose[A,B,C](f: B => C, g: A => B): A => C = a => f(g(a))
-
-
-
-
 }

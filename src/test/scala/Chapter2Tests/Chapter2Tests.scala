@@ -33,6 +33,24 @@ class Chapter2Tests extends FlatSpec {
     assert(Chapter2.isSorted(sortedArray, (a: Int, b: Int) => a < b))
   }
 
+  "This method" should "become curried" in {
+    val originalMethod = (a: Int, b: Int) => a < b
+    val curriedLessThanMethod = Chapter2.curry(originalMethod)
+    assert(curriedLessThanMethod(5)(10))
+  }
 
+  "This method" should "become uncurried" in {
+    val originalMethod = (a: Int, b: Int) => a < b
+    val curriedLessThanMethod = Chapter2.curry(originalMethod)
+    assert(curriedLessThanMethod(5)(10))
+    val uncurriedLessThanMethod = Chapter2.uncurry(curriedLessThanMethod)
+    assert(uncurriedLessThanMethod(5,10))
+  }
 
+  "This method" should "compose the two supplied to it" in {
+    val timesTwo = (x: Int) => x * 2
+    val dividedByTwo = (x: Int) => x / 2
+    val composed = Chapter2.compose(timesTwo, dividedByTwo)
+    assert(composed(2) == 2)
+  }
 }
