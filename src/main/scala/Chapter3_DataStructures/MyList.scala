@@ -1,5 +1,7 @@
 package Chapter3_DataStructures
 
+import scala.annotation.tailrec
+
 sealed trait MyList[+A]
 case object MyNil extends MyList[Nothing]
 case class MyConstruct[+A](head: A, tail: MyList[A]) extends MyList[A]
@@ -37,9 +39,19 @@ object MyList {
     case MyConstruct(_, tail) => tail
   }
 
-  //exercise 3.3: write a function that replaces the head of the list with a new value
+  // exercise 3.3: write a function that replaces the head of the list with a new value
   def setHead[A](theList: MyList[A], replacementHead: A): MyList[A] = theList match {
     case MyNil => sys.error("Cannot replace head of Nil MyList")
     case MyConstruct(_, tail) => MyConstruct(replacementHead, tail)
+  }
+
+  // exercise 3.4: write a generalized tail function to drop n number of elements
+  def drop[A](theList: MyList[A], elementsToDrop: Int): MyList[A] = {
+    @tailrec
+    def getRidOfElements(list: MyList[A], droppedElements: Int = 1): MyList[A] = list match {
+      case MyNil => MyNil
+      case MyConstruct(_, tail) => if (droppedElements == elementsToDrop) tail else getRidOfElements(tail, droppedElements + 1)
+    }
+    if (elementsToDrop <= 0) theList else getRidOfElements(theList)
   }
 }
