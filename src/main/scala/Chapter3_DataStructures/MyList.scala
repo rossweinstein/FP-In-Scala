@@ -13,10 +13,19 @@ object MyList {
     case MyConstruct(head, tail) => head + sum(tail)
   }
 
+  def sum2(ints: MyList[Int]) = foldRight(ints,0)((x,y) => x + y)
+
   def product(values: MyList[Double]): Double = values match {
     case MyNil => 1.0
     case MyConstruct(0.0, _) => 0.0
     case MyConstruct(head, tail) => head * product(tail)
+  }
+
+  def product2(values: MyList[Double]) = foldRight(values, 1.0)(_ * _)
+
+  def foldRight[A, B](theList: MyList[A], seed: B)(func: (A,B) => B): B = theList match {
+    case MyNil => seed
+    case MyConstruct(head, tail) => func(head, foldRight(tail, seed)(func))
   }
 
   def apply[A](as: A*): MyList[A] =
@@ -86,4 +95,12 @@ object MyList {
     }
     if (theList == MyNil) MyNil else allButTheLast(theList, MyList[A]())
   }
+
+  // exercise 3.7: can product, implemented using foldRight, halt if it encounters 0.0>
+  // answer: Maybe, at the moment, though, I cannot think of a way to do
+
+  // exercise 3.8: what happens when you pass MyNil or MyConstruct to foldRight?
+  // answer: the original list is returned (see tests for results)
+
+
 }

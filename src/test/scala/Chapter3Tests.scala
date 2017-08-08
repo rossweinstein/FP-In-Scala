@@ -1,4 +1,4 @@
-import Chapter3_DataStructures.{MyList, MyNil}
+import Chapter3_DataStructures.{MyConstruct, MyList, MyNil}
 import org.scalatest.FlatSpec
 
 /**
@@ -76,6 +76,10 @@ class Chapter3Tests extends FlatSpec {
     val originalList = MyNil
     val droppedList = MyList.init(originalList)
     assert(droppedList == MyNil)
+  }
+
+  "The method foldRight" should "return the original list when passed MyNil and MyConstruct(_,_)" in {
+    assert(MyList.foldRight(MyList(1,2,3), MyNil:MyList[Int])(MyConstruct(_,_)) == MyList(1,2,3))
   }
 
 }
