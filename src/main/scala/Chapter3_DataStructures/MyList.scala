@@ -54,4 +54,25 @@ object MyList {
     }
     if (elementsToDrop <= 0) theList else getRidOfElements(theList)
   }
+
+  // exercise 3.5: write a function which removes elements from a MyList if they match a predicate
+  def dropWhile[A](theList: MyList[A], conditionFunc: A => Boolean): MyList[A] = {
+    @tailrec
+    def ridMatchingValues(list: MyList[A], accum: MyList[A], index: Int = 0): MyList[A] = list match {
+      case MyNil => reverse(accum)
+      case MyConstruct(head, tail) =>
+        val constructedList = if (conditionFunc(head)) accum else MyConstruct(head, accum)
+        ridMatchingValues(tail, constructedList, index + 1)
+    }
+    if (theList == MyNil) MyNil else ridMatchingValues(theList, MyList[A]())
+  }
+
+  def reverse[A](theList: MyList[A]): MyList[A] = {
+    @tailrec
+    def reversal(originalList: MyList[A], reversedList: MyList[A]): MyList[A] = originalList match {
+      case MyNil => reversedList
+      case MyConstruct(head, tail) => reversal(tail, MyConstruct(head, reversedList))
+    }
+    if (theList == MyNil) MyNil else reversal(theList, MyList[A]())
+  }
 }

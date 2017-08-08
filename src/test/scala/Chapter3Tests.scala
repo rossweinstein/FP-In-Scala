@@ -48,9 +48,21 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyList(1,2,3,4,5,6,7,8,9,10))
   }
 
-  "The method drop" should "return MyNil when given a list of type MyNil" in {
+  "The method drop" should "make return MyNil when given a list of type MyNil" in {
     val originalList = MyNil
     val droppedList = MyList.drop(originalList, 5)
+    assert(droppedList == MyNil)
+  }
+
+  "The method dropWhile" should "return a new MyList with values that do not match the predicate" in {
+    val originalList = MyList(1,2,3,4,5,6,7,8,9,10)
+    val droppedList = MyList.dropWhile(originalList, (a: Int) => a < 8)
+    assert(droppedList == MyList(8,9,10))
+  }
+
+  "The method dropWhile" should "return MyNil if the supplied list is MyNil" in {
+    val originalList = MyNil
+    val droppedList = MyList.dropWhile(originalList, (a: Int) => a < 8)
     assert(droppedList == MyNil)
   }
 
