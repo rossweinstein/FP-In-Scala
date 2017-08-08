@@ -106,4 +106,14 @@ object MyList {
   def length[A](theList: MyList[A]): Int = {
     if (theList == MyNil) 0 else foldRight(theList, 0)((_, total) => total + 1)
   }
+
+  // exercise 3.10: write foldLeft with tail recursion
+  def foldLeft[A,B](theList: MyList[A], seed: B)(func: (B,A) => B): B = {
+    @tailrec
+    def foldingLeft(list: MyList[A], seed: B): B = list match {
+      case MyNil => seed
+      case MyConstruct(head, tail) => foldingLeft(tail, func(seed, head))
+    }
+    if (theList == MyNil) sys.error("Cannot foldLeft on MyNil MyList") else foldingLeft(theList, seed)
+  }
 }

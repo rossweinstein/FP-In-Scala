@@ -92,4 +92,15 @@ class Chapter3Tests extends FlatSpec {
     assert(MyList.length(theList) == 0)
   }
 
+  "The method foldLeft" should "return the list value totals" in {
+    assert(MyList.foldLeft(MyList(1,2,3), 0)(_ + _) == 6)
+  }
+
+  "The method foldLeft" should "return an error when passed a MyNil MyList" in {
+    val theError = intercept[Exception] {
+      MyList.foldLeft(MyNil:MyList[Int], 0)(_ + _)
+    }
+    assert(theError.getMessage == "Cannot foldLeft on MyNil MyList")
+  }
+
 }
