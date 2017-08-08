@@ -82,4 +82,14 @@ class Chapter3Tests extends FlatSpec {
     assert(MyList.foldRight(MyList(1,2,3), MyNil:MyList[Int])(MyConstruct(_,_)) == MyList(1,2,3))
   }
 
+  "The method length" should "return the correct length of the MyList" in {
+    val theList = MyList(1,2,3,4,5)
+    assert(MyList.length(theList) == 5)
+  }
+
+  "The method length" should "return 0 if the MyList is MyNil" in {
+    val theList = MyNil
+    assert(MyList.length(theList) == 0)
+  }
+
 }

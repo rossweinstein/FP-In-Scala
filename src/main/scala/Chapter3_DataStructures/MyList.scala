@@ -102,5 +102,8 @@ object MyList {
   // exercise 3.8: what happens when you pass MyNil or MyConstruct to foldRight?
   // answer: the original list is returned (see tests for results)
 
-
+  // exercise 3.9: compute length of a list using foldRight
+  def length[A](theList: MyList[A]): Int = {
+    if (theList == MyNil) 0 else foldRight(theList, 0)((_, total) => total + 1)
+  }
 }
