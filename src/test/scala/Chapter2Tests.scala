@@ -1,9 +1,6 @@
 import Chapter2_GettingStarted.Chapter2
 import org.scalatest.FlatSpec
 
-/**
-  * Created by rweinstein on 8/7/17.
-  */
 class Chapter2Tests extends FlatSpec {
 
   "The 10th Fibonacci number" should "equal 55" in {
