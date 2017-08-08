@@ -58,15 +58,16 @@ object MyList {
   // exercise 3.5: write a function which removes elements from a MyList if they match a predicate
   def dropWhile[A](theList: MyList[A], conditionFunc: A => Boolean): MyList[A] = {
     @tailrec
-    def ridMatchingValues(list: MyList[A], accum: MyList[A], index: Int = 0): MyList[A] = list match {
+    def ridMatchingValues(list: MyList[A], accum: MyList[A]): MyList[A] = list match {
       case MyNil => reverse(accum)
       case MyConstruct(head, tail) =>
         val constructedList = if (conditionFunc(head)) accum else MyConstruct(head, accum)
-        ridMatchingValues(tail, constructedList, index + 1)
+        ridMatchingValues(tail, constructedList)
     }
     if (theList == MyNil) MyNil else ridMatchingValues(theList, MyList[A]())
   }
 
+  // not apart of the exercises, needed it for how my loops are constructed
   def reverse[A](theList: MyList[A]): MyList[A] = {
     @tailrec
     def reversal(originalList: MyList[A], reversedList: MyList[A]): MyList[A] = originalList match {
@@ -74,5 +75,15 @@ object MyList {
       case MyConstruct(head, tail) => reversal(tail, MyConstruct(head, reversedList))
     }
     if (theList == MyNil) MyNil else reversal(theList, MyList[A]())
+  }
+
+  // exercise 3.6: write a function that returns a MyList consisting of all but the last element
+  def init[A](theList: MyList[A]): MyList[A] = {
+    @tailrec
+    def allButTheLast(list: MyList[A], accum: MyList[A]): MyList[A] = list match {
+      case MyConstruct(_, t) if (t == MyNil) => reverse(accum)
+      case MyConstruct(head, tail) => allButTheLast(tail, MyConstruct(head, accum))
+    }
+    if (theList == MyNil) MyNil else allButTheLast(theList, MyList[A]())
   }
 }

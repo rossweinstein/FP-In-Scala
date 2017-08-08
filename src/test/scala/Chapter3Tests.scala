@@ -66,4 +66,16 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyNil)
   }
 
+  "The method init" should "return a new MyList with all the values except the last" in {
+    val originalList = MyList(1,2,3,4,5)
+    val droppedList = MyList.init(originalList)
+    assert(droppedList == MyList(1,2,3,4))
+  }
+
+  "The method init" should "return MyNil if the supplied list is MyNil" in {
+    val originalList = MyNil
+    val droppedList = MyList.init(originalList)
+    assert(droppedList == MyNil)
+  }
+
 }
