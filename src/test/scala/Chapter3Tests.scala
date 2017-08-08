@@ -1,9 +1,6 @@
 import Chapter3_DataStructures.{MyConstruct, MyList, MyNil}
 import org.scalatest.FlatSpec
 
-/**
-  * Created by rweinstein on 8/7/17.
-  */
 class Chapter3Tests extends FlatSpec {
 
   // exercise 3.1
