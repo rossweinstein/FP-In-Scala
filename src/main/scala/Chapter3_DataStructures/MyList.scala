@@ -97,7 +97,7 @@ object MyList {
   }
 
   // exercise 3.7: can product, implemented using foldRight, halt if it encounters 0.0>
-  // answer: Maybe, at the moment, though, I cannot think of a way to do
+  // answer: Maybe, at the moment, though, I cannot think of a way to do it
 
   // exercise 3.8: what happens when you pass MyNil or MyConstruct to foldRight?
   // answer: the original list is returned (see tests for results)
