@@ -13,7 +13,7 @@ object MyList {
     case MyConstruct(head, tail) => head + sum(tail)
   }
 
-  def sum2(ints: MyList[Int]) = foldRight(ints,0)((x,y) => x + y)
+  def sum2(ints: MyList[Int]): Int = foldRight(ints,0)((x,y) => x + y)
 
   def product(values: MyList[Double]): Double = values match {
     case MyNil => 1.0
@@ -21,7 +21,7 @@ object MyList {
     case MyConstruct(head, tail) => head * product(tail)
   }
 
-  def product2(values: MyList[Double]) = foldRight(values, 1.0)(_ * _)
+  def product2(values: MyList[Double]): Double = foldRight(values, 1.0)(_ * _)
 
   def foldRight[A, B](theList: MyList[A], seed: B)(func: (A,B) => B): B = theList match {
     case MyNil => seed
@@ -34,7 +34,7 @@ object MyList {
 
   // exercise 3.1
   // answer: case MyConstruct(head1, MyConstruct(head2, MyConstruct(3, MyConstruct(4, _)))) => head1 + head2
-  val x = MyList(1,2,3,4,5) match {
+  val x: Int = MyList(1,2,3,4,5) match {
     case MyConstruct(head, MyConstruct(4, _)) => head
     case MyNil => 42
     case MyConstruct(head1, MyConstruct(head2, MyConstruct(3, MyConstruct(4, _)))) => head1 + head2
@@ -90,7 +90,7 @@ object MyList {
   def init[A](theList: MyList[A]): MyList[A] = {
     @tailrec
     def allButTheLast(list: MyList[A], accum: MyList[A]): MyList[A] = list match {
-      case MyConstruct(_, t) if (t == MyNil) => reverse(accum)
+      case MyConstruct(_, t) if t == MyNil => reverse(accum)
       case MyConstruct(head, tail) => allButTheLast(tail, MyConstruct(head, accum))
     }
     if (theList == MyNil) MyNil else allButTheLast(theList, MyList[A]())
@@ -115,5 +115,12 @@ object MyList {
       case MyConstruct(head, tail) => foldingLeft(tail, func(seed, head))
     }
     if (theList == MyNil) sys.error("Cannot foldLeft on MyNil MyList") else foldingLeft(theList, seed)
+  }
+
+  // exercise 3.11: sum, product, and length using foldLeft
+  def sum3(ints: MyList[Int]): Int = foldLeft(ints,0)(_ + _)
+  def product3(values: MyList[Double]): Double = foldLeft(values, 1.0)(_ * _)
+  def length2[A](theList: MyList[A]): Int = {
+    if (theList == MyNil) 0 else foldLeft(theList, 0)((total, _) => total + 1)
   }
 }

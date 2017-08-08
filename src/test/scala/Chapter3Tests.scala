@@ -6,10 +6,12 @@ import org.scalatest.FlatSpec
   */
 class Chapter3Tests extends FlatSpec {
 
+  // exercise 3.1
   "The answer to exercise 3.1" should "equal 3" in {
     assert(MyList.x == 3)
   }
 
+  // exercise 3.2
   "The method tail" should "make a new list of all elements except for the head" in {
     val originalList = MyList(1,2,3)
     val listTail = MyList.tail(originalList)
@@ -22,6 +24,7 @@ class Chapter3Tests extends FlatSpec {
     assert(listTail == MyNil)
   }
 
+  // exercise 3.3
   "The method setHead" should "make a new list with the head element replaced by the given value" in {
     val originalList = MyList(1,2,3)
     val listWithDifferentHead = MyList.setHead(originalList, 4)
@@ -36,6 +39,7 @@ class Chapter3Tests extends FlatSpec {
     assert(errorList.getMessage == "Cannot replace head of Nil MyList")
   }
 
+  // exercise 3.4
   "The method drop" should "make a new list without the desired number of dropped elements from the head" in {
     val originalList = MyList(1,2,3,4,5,6,7,8,9,10)
     val droppedList = MyList.drop(originalList, 5)
@@ -54,6 +58,7 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyNil)
   }
 
+  // exercise 3.5
   "The method dropWhile" should "return a new MyList with values that do not match the predicate" in {
     val originalList = MyList(1,2,3,4,5,6,7,8,9,10)
     val droppedList = MyList.dropWhile(originalList, (a: Int) => a < 8)
@@ -66,6 +71,7 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyNil)
   }
 
+  // exercise 3.6
   "The method init" should "return a new MyList with all the values except the last" in {
     val originalList = MyList(1,2,3,4,5)
     val droppedList = MyList.init(originalList)
@@ -78,10 +84,14 @@ class Chapter3Tests extends FlatSpec {
     assert(droppedList == MyNil)
   }
 
+  // exercise 3.7 -> NOTHING TO TEST
+
+  // exercise 3.8
   "The method foldRight" should "return the original list when passed MyNil and MyConstruct(_,_)" in {
     assert(MyList.foldRight(MyList(1,2,3), MyNil:MyList[Int])(MyConstruct(_,_)) == MyList(1,2,3))
   }
 
+  // exercise 3.9
   "The method length" should "return the correct length of the MyList" in {
     val theList = MyList(1,2,3,4,5)
     assert(MyList.length(theList) == 5)
@@ -92,6 +102,7 @@ class Chapter3Tests extends FlatSpec {
     assert(MyList.length(theList) == 0)
   }
 
+  // exercise 3.10
   "The method foldLeft" should "return the list value totals" in {
     assert(MyList.foldLeft(MyList(1,2,3), 0)(_ + _) == 6)
   }
@@ -101,6 +112,25 @@ class Chapter3Tests extends FlatSpec {
       MyList.foldLeft(MyNil:MyList[Int], 0)(_ + _)
     }
     assert(theError.getMessage == "Cannot foldLeft on MyNil MyList")
+  }
+
+  // exercise 3.11
+  "The method sum3" should "return 6 when asked to sum MyList(1,2,3)" in {
+    assert(MyList.sum3(MyList(1,2,3)) == 6)
+  }
+
+  "The method product3" should "return 6 when asked to sum MyList(1,2,3)" in {
+    assert(MyList.product3(MyList(1,2,3)) == 6)
+  }
+
+  "The method length2" should "return the correct length of the MyList" in {
+    val theList = MyList(1,2,3,4,5)
+    assert(MyList.length2(theList) == 5)
+  }
+
+  "The method length2" should "return 0 if the MyList is MyNil" in {
+    val theList = MyNil
+    assert(MyList.length2(theList) == 0)
   }
 
 }
